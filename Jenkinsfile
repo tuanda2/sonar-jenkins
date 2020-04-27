@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
       // Docker image versioning
-      BUILD_NAME = $(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout -U -e)
+      //BUILD_NAME = $(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout -U -e)
+      BUILD_NAME = echo sh(returnStdout: true, script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout --batch-mode -U -e').trim()
       BUILD_VERSION = $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout -U -e)
       IMAGE = $BUILD_NAME:$BUILD_VERSION
     }
