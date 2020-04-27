@@ -4,7 +4,7 @@ pipeline {
       // Docker image versioning
       BUILD_NAME = echo sh(returnStdout: true, script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout --batch-mode -U -e').trim()
       BUILD_VERSION = echo sh(returnStdout: true, script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout --batch-mode -U -e').trim()
-      IMAGE = $BUILD_NAME:$BUILD_VERSION
+      IMAGE = "$BUILD_NAME:$BUILD_VERSION"
     }
     stages {
         stage('Checkout Source Code') {
